@@ -1,0 +1,81 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Four-Letter Words Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+            #correct-words {
+            margin-top: 20px;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        #correct-words li {
+            list-style-type: none;
+            margin: 5px;
+            padding: 10px;
+            background-color: #a8e6ce;
+            border-radius: 5px;
+        }
+		#correct-words li:hover {border:1px outset #a8e6ce;background-color:#f0fff0;}
+		        #counter {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Four-Letter Words Starting with 'I'</h1>
+    <p>Try to guess as many four-letter words starting with 'I' as you can!</p>
+    <input type="text" id="word-input" placeholder="Type your guess..." autofocus>
+    <button onclick="checkWord()">Submit</button>    <div id="counter">Correct Words: 0 / 0</div> 
+    <ul id="correct-words"></ul>
+
+    <script>
+        // List of all four-letter words starting with 'E'
+        const wordList = ["IAMB", "IBEX", "IBIS", "ICED", "ICES", "ICHS", "ICKS", "ICKY", "ICON", "IDEA", "IDEM", "IDES", "IDLE", "IDLY", "IDOL", "IDYL", "IFFY", "IGGS", "IGLU", "IKAT", "IKON", "ILEA", "ILEX", "ILIA", "ILKA", "ILKS", "ILLS", "ILLY", "IMAM", "IMID", "IMMY", "IMPI", "IMPS", "INBY", "INCH", "INFO", "INIA", "INKS", "INKY", "INLY", "INNS", "INRO", "INTI", "INTO", "IONS", "IOTA", "IRED", "IRES", "IRID", "IRIS", "IRKS", "IRON", "ISBA", "ISLE", "ISMS", "ITCH", "ITEM", "IWIS", "IXIA", "IZAR"
+].map(word => word.toLowerCase()); // Add all 113 words here
+        const correctGuesses = [];
+        const totalWords = wordList.length;
+
+        function updateCounter() {
+            const correctCount = correctGuesses.length;
+            document.getElementById("counter").textContent = `Correct Words: ${correctCount} / ${totalWords}`;
+        }
+
+        function checkWord() {
+            const input = document.getElementById("word-input").value.trim().toLowerCase();
+
+            // Check if the input is in the word list and hasn't been guessed before
+            if (wordList.includes(input) && !correctGuesses.includes(input)) {
+                correctGuesses.push(input);
+                document.getElementById("correct-words").innerHTML += `<li>${input}</li>`;
+                updateCounter(); // Update the counter display
+            }
+
+            // Clear the input box
+            document.getElementById("word-input").value = '';
+        }
+
+        // Add an event listener to the input box to handle the Enter key
+        document.getElementById("word-input").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                checkWord(); // Call the checkWord function when Enter is pressed
+            }
+        });
+
+        // Initialize the counter on page load
+        updateCounter();
+    </script>
+</body>
+</html>

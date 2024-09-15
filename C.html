@@ -1,0 +1,81 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Four-Letter Words Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+            #correct-words {
+            margin-top: 20px;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        #correct-words li {
+            list-style-type: none;
+            margin: 5px;
+            padding: 10px;
+            background-color: #a8e6ce;
+            border-radius: 5px;
+        }
+		#correct-words li:hover {border:1px outset #a8e6ce;background-color:#f0fff0;}
+		        #counter {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Four-Letter Words Starting with 'C'</h1>
+    <p>Try to guess as many four-letter words starting with 'C' as you can!</p>
+    <input type="text" id="word-input" placeholder="Type your guess..." autofocus>
+    <button onclick="checkWord()">Submit</button>    <div id="counter">Correct Words: 0 / 0</div> 
+    <ul id="correct-words"></ul>
+
+    <script>
+        // List of all four-letter words starting with 'E'
+        const wordList = ["CABS", "CACA", "CADE", "CADI", "CADS", "CAFE", "CAFF", "CAFS", "CAGE", "CAGY", "CAID", "CAIN", "CAKE", "CAKY", "CALF", "CALK", "CALL", "CALM", "CALO", "CALS", "CALX", "CAME", "CAMI", "CAMO", "CAMP", "CAMS", "CANE", "CANS", "CANT", "CAPE", "CAPH", "CAPO", "CAPS", "CARB", "CARD", "CARE", "CARK", "CARL", "CARN", "CARP", "CARR", "CARS", "CART", "CASA", "CASE", "CASH", "CASK", "CAST", "CATE", "CATH", "CATS", "CAUL", "CAVA", "CAVE", "CAVY", "CAWS", "CAYS", "CAZH", "CECA", "CEDE", "CEDI", "CEES", "CEIL", "CELL", "CELS", "CELT", "CENT", "CEPE", "CEPS", "CERE", "CERO", "CERT", "CESS", "CETE", "CHAD", "CHAI", "CHAM", "CHAO", "CHAP", "CHAR", "CHAT", "CHAW", "CHAY", "CHEF", "CHEM", "CHEW", "CHEZ", "CHIA", "CHIC", "CHID", "CHIN", "CHIP", "CHIS", "CHIT", "CHOC", "CHON", "CHOP", "CHOW", "CHUB", "CHUG", "CHUM", "CIAO", "CIGS", "CINE", "CINQ", "CION", "CIRE", "CIST", "CITE", "CITY", "CLAD", "CLAG", "CLAM", "CLAN", "CLAP", "CLAW", "CLAY", "CLEF", "CLEG", "CLEW", "CLIP", "CLIT", "CLOD", "CLOG", "CLON", "CLOP", "CLOT", "CLOY", "CLUB", "CLUE", "COAL", "COAT", "COAX", "COBB", "COBS", "COCA", "COCK", "COCO", "CODA", "CODE", "CODS", "COED", "COFF", "COFT", "COGS", "COHO", "COIF", "COIL", "COIN", "COIR", "COKE", "COKY", "COLA", "COLD", "COLE", "COLS", "COLT", "COLY", "COMA", "COMB", "COME", "COMM", "COMP", "CONE", "CONI", "CONK", "CONN", "CONS", "CONY", "COOF", "COOK", "COOL", "COON", "COOP", "COOS", "COOT", "COPE", "COPI", "COPS", "COPY", "CORD", "CORE", "CORF", "CORK", "CORM", "CORN", "CORS", "CORY", "COSH", "COSS", "COST", "COSY", "COTE", "COTS", "COUP", "COVE", "COWL", "COWS", "COWY", "COXA", "COYS", "COZY", "CRAB", "CRAG", "CRAM", "CRAP", "CRAW", "CRED", "CREW", "CRIA", "CRIB", "CRIP", "CRIS", "CRIT", "CROC", "CROP", "CROW", "CRUD", "CRUS", "CRUX", "CUBE", "CUBS", "CUCK", "CUDS", "CUED", "CUES", "CUFF", "CUIF", "CUKE", "CULL", "CULM", "CULT", "CUMS", "CUPS", "CURB", "CURD", "CURE", "CURF", "CURL", "CURN", "CURR", "CURS", "CURT", "CUSK", "CUSP", "CUSS", "CUTE", "CUTS", "CWMS", "CYAN", "CYMA", "CYME", "CYST", "CZAR"
+].map(word => word.toLowerCase()); // Add all 113 words here
+        const correctGuesses = [];
+        const totalWords = wordList.length;
+
+        function updateCounter() {
+            const correctCount = correctGuesses.length;
+            document.getElementById("counter").textContent = `Correct Words: ${correctCount} / ${totalWords}`;
+        }
+
+        function checkWord() {
+            const input = document.getElementById("word-input").value.trim().toLowerCase();
+
+            // Check if the input is in the word list and hasn't been guessed before
+            if (wordList.includes(input) && !correctGuesses.includes(input)) {
+                correctGuesses.push(input);
+                document.getElementById("correct-words").innerHTML += `<li>${input}</li>`;
+                updateCounter(); // Update the counter display
+            }
+
+            // Clear the input box
+            document.getElementById("word-input").value = '';
+        }
+
+        // Add an event listener to the input box to handle the Enter key
+        document.getElementById("word-input").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                checkWord(); // Call the checkWord function when Enter is pressed
+            }
+        });
+
+        // Initialize the counter on page load
+        updateCounter();
+    </script>
+</body>
+</html>

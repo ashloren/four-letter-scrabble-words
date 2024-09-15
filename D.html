@@ -1,0 +1,81 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Four-Letter Words Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+            #correct-words {
+            margin-top: 20px;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        #correct-words li {
+            list-style-type: none;
+            margin: 5px;
+            padding: 10px;
+            background-color: #a8e6ce;
+            border-radius: 5px;
+        }
+		#correct-words li:hover {border:1px outset #a8e6ce;background-color:#f0fff0;}
+		        #counter {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Four-Letter Words Starting with 'D'</h1>
+    <p>Try to guess as many four-letter words starting with 'D' as you can!</p>
+    <input type="text" id="word-input" placeholder="Type your guess..." autofocus>
+    <button onclick="checkWord()">Submit</button>    <div id="counter">Correct Words: 0 / 0</div> 
+    <ul id="correct-words"></ul>
+
+    <script>
+        // List of all four-letter words starting with 'E'
+        const wordList = ["DABS", "DACE", "DADA", "DADO", "DADS", "DAFF", "DAFT", "DAGS", "DAHL", "DAHS", "DAIS", "DAKS", "DALE", "DALS", "DAME", "DAMN", "DAMP", "DAMS", "DANG", "DANK", "DANS", "DAPS", "DARB", "DARE", "DARK", "DARN", "DART", "DASH", "DATA", "DATE", "DATO", "DAUB", "DAUT", "DAVY", "DAWK", "DAWN", "DAWS", "DAWT", "DAYS", "DAZE", "DEAD", "DEAF", "DEAL", "DEAN", "DEAR", "DEBS", "DEBT", "DECK", "DECO", "DEED", "DEEM", "DEEP", "DEER", "DEES", "DEET", "DEFI", "DEFT", "DEFY", "DEIL", "DEKE", "DELE", "DELF", "DELI", "DELL", "DELS", "DELT", "DEME", "DEMO", "DEMY", "DENE", "DENI", "DENS", "DENT", "DENY", "DEPS", "DERE", "DERM", "DESI", "DESK", "DEVA", "DEVI", "DEVS", "DEWS", "DEWY", "DEXY", "DEYS", "DHAK", "DHAL", "DHOW", "DIAL", "DIBS", "DICE", "DICK", "DIDO", "DIDY", "DIED", "DIEL", "DIES", "DIET", "DIFF", "DIFS", "DIGS", "DIKE", "DILL", "DIME", "DIMS", "DINE", "DING", "DINK", "DINO", "DINS", "DINT", "DIOL", "DIPS", "DIPT", "DIRE", "DIRK", "DIRL", "DIRT", "DISC", "DISH", "DISK", "DISS", "DITA", "DITE", "DITS", "DITZ", "DIVA", "DIVE", "DJIN", "DOAT", "DOBE", "DOBY", "DOCK", "DOCS", "DODO", "DOER", "DOES", "DOFF", "DOGE", "DOGS", "DOGY", "DOHS", "DOIT", "DOJO", "DOLE", "DOLL", "DOLS", "DOLT", "DOME", "DOMS", "DONA", "DONE", "DONG", "DONS", "DOOB", "DOOM", "DOOR", "DOPA", "DOPE", "DOPY", "DORE", "DORK", "DORM", "DORP", "DORR", "DORS", "DORY", "DOSA", "DOSE", "DOSH", "DOSS", "DOST", "DOTE", "DOTH", "DOTS", "DOTY", "DOUM", "DOUR", "DOUT", "DOUX", "DOVE", "DOWN", "DOWS", "DOXX", "DOXY", "DOZE", "DOZY", "DRAB", "DRAG", "DRAM", "DRAT", "DRAW", "DRAY", "DREE", "DREG", "DREK", "DREW", "DRIB", "DRIP", "DROP", "DRUB", "DRUG", "DRUM", "DRYS", "DUAD", "DUAL", "DUBS", "DUCE", "DUCI", "DUCK", "DUCT", "DUDE", "DUDS", "DUEL", "DUES", "DUET", "DUFF", "DUGS", "DUIT", "DUKE", "DULL", "DULY", "DUMA", "DUMB", "DUMP", "DUNE", "DUNG", "DUNK", "DUNS", "DUNT", "DUOS", "DUPE", "DUPS", "DURA", "DURE", "DURN", "DURO", "DURR", "DUSK", "DUST", "DUTY", "DYAD", "DYED", "DYER", "DYES", "DYKE", "DYNE"
+].map(word => word.toLowerCase()); // Add all 113 words here
+        const correctGuesses = [];
+        const totalWords = wordList.length;
+
+        function updateCounter() {
+            const correctCount = correctGuesses.length;
+            document.getElementById("counter").textContent = `Correct Words: ${correctCount} / ${totalWords}`;
+        }
+
+        function checkWord() {
+            const input = document.getElementById("word-input").value.trim().toLowerCase();
+
+            // Check if the input is in the word list and hasn't been guessed before
+            if (wordList.includes(input) && !correctGuesses.includes(input)) {
+                correctGuesses.push(input);
+                document.getElementById("correct-words").innerHTML += `<li>${input}</li>`;
+                updateCounter(); // Update the counter display
+            }
+
+            // Clear the input box
+            document.getElementById("word-input").value = '';
+        }
+
+        // Add an event listener to the input box to handle the Enter key
+        document.getElementById("word-input").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                checkWord(); // Call the checkWord function when Enter is pressed
+            }
+        });
+
+        // Initialize the counter on page load
+        updateCounter();
+    </script>
+</body>
+</html>

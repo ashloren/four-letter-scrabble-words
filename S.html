@@ -1,0 +1,81 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Four-Letter Words Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+            #correct-words {
+            margin-top: 20px;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        #correct-words li {
+            list-style-type: none;
+            margin: 5px;
+            padding: 10px;
+            background-color: #a8e6ce;
+            border-radius: 5px;
+        }
+		#correct-words li:hover {border:1px outset #a8e6ce;background-color:#f0fff0;}
+		        #counter {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Four-Letter Words Starting with 'S'</h1>
+    <p>Try to guess as many four-letter words starting with 'S' as you can!</p>
+    <input type="text" id="word-input" placeholder="Type your guess..." autofocus>
+    <button onclick="checkWord()">Submit</button>    <div id="counter">Correct Words: 0 / 0</div> 
+    <ul id="correct-words"></ul>
+
+    <script>
+        // List of all four-letter words starting with 'E'
+        const wordList = ["SABE", "SABS", "SACK", "SACS", "SADE", "SADI", "SAFE", "SAGA", "SAGE", "SAGO", "SAGS", "SAGY", "SAID", "SAIL", "SAIN", "SAKE", "SAKI", "SALE", "SALL", "SALP", "SALS", "SALT", "SAME", "SAMP", "SAND", "SANE", "SANG", "SANK", "SANS", "SAPS", "SARD", "SARI", "SARK", "SASH", "SASS", "SATE", "SATI", "SAUL", "SAVE", "SAWN", "SAWS", "SAYS", "SCAB", "SCAD", "SCAG", "SCAM", "SCAN", "SCAR", "SCAT", "SCOP", "SCOT", "SCOW", "SCRY", "SCUD", "SCUM", "SCUP", "SCUT", "SEAL", "SEAM", "SEAR", "SEAS", "SEAT", "SECS", "SECT", "SEED", "SEEK", "SEEL", "SEEM", "SEEN", "SEEP", "SEER", "SEES", "SEGO", "SEGS", "SEIF", "SEIS", "SELF", "SELL", "SELS", "SEME", "SEMI", "SEND", "SENE", "SENT", "SEPS", "SEPT", "SERA", "SERE", "SERF", "SERS", "SESH", "SETA", "SETS", "SETT", "SEVS", "SEWN", "SEWS", "SEXT", "SEXY", "SHAD", "SHAG", "SHAH", "SHAM", "SHAT", "SHAW", "SHAY", "SHEA", "SHED", "SHEN", "SHES", "SHEW", "SHHH", "SHIM", "SHIN", "SHIP", "SHIT", "SHIV", "SHMO", "SHOD", "SHOE", "SHOG", "SHOO", "SHOP", "SHOT", "SHOW", "SHRI", "SHUL", "SHUN", "SHUT", "SHWA", "SIAL", "SIBB", "SIBS", "SICE", "SICK", "SICS", "SIDE", "SIDH", "SIFT", "SIGH", "SIGN", "SIGS", "SIKA", "SIKE", "SILD", "SILK", "SILL", "SILO", "SILT", "SIMA", "SIMP", "SIMS", "SINE", "SING", "SINH", "SINK", "SINS", "SIPE", "SIPS", "SIRE", "SIRS", "SITE", "SITH", "SITS", "SIZE", "SIZY", "SKAG", "SKAS", "SKAT", "SKED", "SKEE", "SKEG", "SKEP", "SKEW", "SKID", "SKIM", "SKIN", "SKIP", "SKIS", "SKIT", "SKOL", "SKRY", "SKUA", "SLAB", "SLAG", "SLAM", "SLAP", "SLAT", "SLAW", "SLAY", "SLED", "SLEW", "SLID", "SLIM", "SLIP", "SLIT", "SLOB", "SLOE", "SLOG", "SLOP", "SLOT", "SLOW", "SLUB", "SLUE", "SLUG", "SLUM", "SLUR", "SLUT", "SMEW", "SMIT", "SMOG", "SMUG", "SMUT", "SNAG", "SNAP", "SNAW", "SNED", "SNIB", "SNIP", "SNIT", "SNOB", "SNOG", "SNOT", "SNOW", "SNUB", "SNUG", "SNYE", "SOAK", "SOAP", "SOAR", "SOBA", "SOBS", "SOCA", "SOCK", "SODA", "SODS", "SOFA", "SOFT", "SOHS", "SOIL", "SOJA", "SOJU", "SOKE", "SOLA", "SOLD", "SOLE", "SOLI", "SOLO", "SOLS", "SOMA", "SOME", "SOMS", "SONE", "SONG", "SONS", "SOOK", "SOON", "SOOT", "SOPH", "SOPS", "SORA", "SORB", "SORD", "SORE", "SORI", "SORN", "SORT", "SOTH", "SOTS", "SOUK", "SOUL", "SOUP", "SOUR", "SOUS", "SOWN", "SOWS", "SOYA", "SOYS", "SPAE", "SPAM", "SPAN", "SPAR", "SPAS", "SPAT", "SPAY", "SPAZ", "SPEC", "SPED", "SPEW", "SPIN", "SPIT", "SPIV", "SPOT", "SPRY", "SPUD", "SPUE", "SPUN", "SPUR", "SRIS", "STAB", "STAG", "STAN", "STAR", "STAT", "STAW", "STAY", "STEM", "STEP", "STET", "STEW", "STEY", "STIM", "STIR", "STOA", "STOB", "STOP", "STOT", "STOW", "STUB", "STUD", "STUM", "STUN", "STYE", "SUBA", "SUBS", "SUCH", "SUCK", "SUDD", "SUDS", "SUED", "SUER", "SUES", "SUET", "SUGH", "SUIT", "SUKH", "SUKS", "SULK", "SULU", "SUMI", "SUMO", "SUMP", "SUMS", "SUMY", "SUNG", "SUNK", "SUNN", "SUNS", "SUPE", "SUPS", "SUQS", "SURA", "SURD", "SURE", "SURF", "SUSS", "SWAB", "SWAG", "SWAM", "SWAN", "SWAP", "SWAT", "SWAY", "SWIG", "SWIM", "SWOB", "SWOP", "SWOT", "SWUM", "SYBO", "SYCE", "SYKE", "SYLI", "SYNC", "SYNE", "SYPH"
+].map(word => word.toLowerCase()); // Add all 113 words here
+        const correctGuesses = [];
+        const totalWords = wordList.length;
+
+        function updateCounter() {
+            const correctCount = correctGuesses.length;
+            document.getElementById("counter").textContent = `Correct Words: ${correctCount} / ${totalWords}`;
+        }
+
+        function checkWord() {
+            const input = document.getElementById("word-input").value.trim().toLowerCase();
+
+            // Check if the input is in the word list and hasn't been guessed before
+            if (wordList.includes(input) && !correctGuesses.includes(input)) {
+                correctGuesses.push(input);
+                document.getElementById("correct-words").innerHTML += `<li>${input}</li>`;
+                updateCounter(); // Update the counter display
+            }
+
+            // Clear the input box
+            document.getElementById("word-input").value = '';
+        }
+
+        // Add an event listener to the input box to handle the Enter key
+        document.getElementById("word-input").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                checkWord(); // Call the checkWord function when Enter is pressed
+            }
+        });
+
+        // Initialize the counter on page load
+        updateCounter();
+    </script>
+</body>
+</html>

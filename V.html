@@ -1,0 +1,81 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Four-Letter Words Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+            #correct-words {
+            margin-top: 20px;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        #correct-words li {
+            list-style-type: none;
+            margin: 5px;
+            padding: 10px;
+            background-color: #a8e6ce;
+            border-radius: 5px;
+        }
+		#correct-words li:hover {border:1px outset #a8e6ce;background-color:#f0fff0;}
+		        #counter {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Four-Letter Words Starting with 'V'</h1>
+    <p>Try to guess as many four-letter words starting with 'V' as you can!</p>
+    <input type="text" id="word-input" placeholder="Type your guess..." autofocus>
+    <button onclick="checkWord()">Submit</button>    <div id="counter">Correct Words: 0 / 0</div> 
+    <ul id="correct-words"></ul>
+
+    <script>
+        // List of all four-letter words starting with 'E'
+        const wordList = ["VACS", "VAGI", "VAIL", "VAIN", "VAIR", "VALE", "VAMP", "VANE", "VANG", "VANS", "VAPE", "VARA", "VARS", "VARY", "VASA", "VASE", "VAST", "VATS", "VATU", "VAUS", "VAVS", "VAWS", "VAXX", "VEAL", "VEEP", "VEER", "VEES", "VEGA", "VEIL", "VEIN", "VELA", "VELD", "VENA", "VEND", "VENT", "VERA", "VERB", "VERT", "VERY", "VEST", "VETO", "VETS", "VEXT", "VIAL", "VIBE", "VICE", "VIDE", "VIDS", "VIED", "VIER", "VIES", "VIEW", "VIFF", "VIGA", "VIGS", "VILE", "VILL", "VIMS", "VINA", "VINE", "VINO", "VINS", "VINY", "VIOL", "VIRL", "VISA", "VISE", "VITA", "VIVA", "VIVE", "VLEI", "VLOG", "VOES", "VOGS", "VOID", "VOLE", "VOLK", "VOLT", "VOTE", "VOWS", "VROW", "VUGG", "VUGH", "VUGS", "VULN"
+].map(word => word.toLowerCase()); // Add all 113 words here
+        const correctGuesses = [];
+        const totalWords = wordList.length;
+
+        function updateCounter() {
+            const correctCount = correctGuesses.length;
+            document.getElementById("counter").textContent = `Correct Words: ${correctCount} / ${totalWords}`;
+        }
+
+        function checkWord() {
+            const input = document.getElementById("word-input").value.trim().toLowerCase();
+
+            // Check if the input is in the word list and hasn't been guessed before
+            if (wordList.includes(input) && !correctGuesses.includes(input)) {
+                correctGuesses.push(input);
+                document.getElementById("correct-words").innerHTML += `<li>${input}</li>`;
+                updateCounter(); // Update the counter display
+            }
+
+            // Clear the input box
+            document.getElementById("word-input").value = '';
+        }
+
+        // Add an event listener to the input box to handle the Enter key
+        document.getElementById("word-input").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                checkWord(); // Call the checkWord function when Enter is pressed
+            }
+        });
+
+        // Initialize the counter on page load
+        updateCounter();
+    </script>
+</body>
+</html>
