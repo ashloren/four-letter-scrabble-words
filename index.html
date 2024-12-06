@@ -198,156 +198,6 @@ body {
 }
 
 
-/* Basic tile styling */
-.tile-container {
-  display: flex;
-  gap: 10px;
-}
-
-.tile {
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  font-family: Arial, sans-serif;
-  background: #f0d9b5;
-  border-radius: 5px;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  animation: popIn 0.5s ease-out forwards;
-  transition: transform 0.3s ease; /* Smooth transition for hover effect */
-}
-
-/* Display the letter */
-.tile::before {
-  content: attr(data-letter);
-  font-size: 1.5em;
-  color: #333;
-}
-
-/* Pop-in animation for tiles */
-@keyframes popIn {
-  0% { transform: scale(0); }
-  70% { transform: scale(1.2); }
-  100% { transform: scale(1); }
-}
-
-/* Hover effect with slight rotation */
-.tile:hover {
-  transform: scale(1.1) rotate(5deg); /* Slight tilt and scale on hover */
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Point value positioning */
-.tile::after {
-  content: attr(data-points);
-  font-size: 0.8em;
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  color: #333;
-  opacity: 0;
-  animation: pointFadeIn 0.7s ease forwards 0.3s;
-}
-
-/* Point fade-in animation */
-@keyframes pointFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Random tilt using nth-child selectors (rotation after popIn animation) */
-.tile:nth-child(1) {
-  animation: popIn 0.5s ease-out forwards, tilt1 0s ease 0.5s forwards;
-}
-.tile:nth-child(2) {
-  animation: popIn 0.5s ease-out forwards, tilt2 0s ease 0.5s forwards;
-}
-.tile:nth-child(3) {
-  animation: popIn 0.5s ease-out forwards, tilt3 0s ease 0.5s forwards;
-}
-.tile:nth-child(4) {
-  animation: popIn 0.5s ease-out forwards, tilt4 0s ease 0.5s forwards;
-}
-.tile:nth-child(5) {
-  animation: popIn 0.5s ease-out forwards, tilt5 0s ease 0.5s forwards;
-}
-
-.tile:nth-child(6) {
-  animation: popIn 0.5s ease-out forwards, tilt1 0s ease 0.5s forwards;
-}
-.tile:nth-child(7) {
-  animation: popIn 0.5s ease-out forwards, tilt2 0s ease 0.5s forwards;
-}
-.tile:nth-child(8) {
-  animation: popIn 0.5s ease-out forwards, tilt3 0s ease 0.5s forwards;
-}
-.tile:nth-child(9) {
-  animation: popIn 0.5s ease-out forwards, tilt4 0s ease 0.5s forwards;
-}
-.tile:nth-child(10) {
-  animation: popIn 0.5s ease-out forwards, tilt5 0s ease 0.5s forwards;
-}
-.tile:nth-child(11) {
-  animation: popIn 0.5s ease-out forwards, tilt1 0s ease 0.5s forwards;
-}
-.tile:nth-child(12) {
-  animation: popIn 0.5s ease-out forwards, tilt2 0s ease 0.5s forwards;
-}
-.tile:nth-child(13) {
-  animation: popIn 0.5s ease-out forwards, tilt3 0s ease 0.5s forwards;
-}
-.tile:nth-child(14) {
-  animation: popIn 0.5s ease-out forwards, tilt4 0s ease 0.5s forwards;
-}
-.tile:nth-child(15) {
-  animation: popIn 0.5s ease-out forwards, tilt5 0s ease 0.5s forwards;
-}
-.tile:nth-child(16) {
-  animation: popIn 0.5s ease-out forwards, tilt5 0s ease 0.5s forwards;
-}
-.tile:nth-child(17) {
-  animation: popIn 0.5s ease-out forwards, tilt1 0s ease 0.5s forwards;
-}
-.tile:nth-child(18) {
-  animation: popIn 0.5s ease-out forwards, tilt2 0s ease 0.5s forwards;
-}
-.tile:nth-child(19) {
-  animation: popIn 0.5s ease-out forwards, tilt3 0s ease 0.5s forwards;
-}
-.tile:nth-child(20) {
-  animation: popIn 0.5s ease-out forwards, tilt4 0s ease 0.5s forwards;
-}
-.tile:nth-child(21) {
-  animation: popIn 0.5s ease-out forwards, tilt5 0s ease 0.5s forwards;
-}
-.tile:nth-child(22) {
-  animation: popIn 0.5s ease-out forwards, tilt5 0s ease 0.5s forwards;
-}
-.tile:nth-child(23) {
-  animation: popIn 0.5s ease-out forwards, tilt1 0s ease 0.5s forwards;
-}
-.tile:nth-child(24) {
-  animation: popIn 0.5s ease-out forwards, tilt2 0s ease 0.5s forwards;
-}
-.tile:nth-child(25) {
-  animation: popIn 0.5s ease-out forwards, tilt3 0s ease 0.5s forwards;
-}
-.tile:nth-child(26) {
-  animation: popIn 0.5s ease-out forwards, tilt4 0s ease 0.5s forwards;
-}
-.tile:nth-child(27) {
-  animation: popIn 0.5s ease-out forwards, tilt5 0s ease 0.5s forwards;
-}
-
-/* Define the different tilt animations */
-@keyframes tilt1 { to { transform: rotate(-3deg); } }
-@keyframes tilt2 { to { transform: rotate(2deg); } }
-@keyframes tilt3 { to { transform: rotate(-5deg); } }
-@keyframes tilt4 { to { transform: rotate(4deg); } }
-@keyframes tilt5 { to { transform: rotate(-2deg); } }
 
  input[type="text"] {
       width: 400px;
@@ -393,32 +243,23 @@ document.querySelectorAll('.tile').forEach(tile => {
 <body>
     <header class="hero">
         <div class="container">
+        
             <h1>If You Want to Win Scrabble Games AND Tournaments...</h1>
             <p>Then mastering all of the four letter words in the Tournament Word List (TWL) is a MUST!</p>
-							<div class="tile-container">
-  <div class="tile" data-letter="F" data-points="4"></div>
-    <div class="tile" data-letter="O" data-points="I"></div>
-      <div class="tile" data-letter="U" data-points="1"></div>
-        <div class="tile" data-letter="R" data-points="1"></div>
-     <br>
-  <div class="tile" data-letter="L" data-points="1"></div>
-  <div class="tile" data-letter="E" data-points="1"></div>
-    <div class="tile" data-letter="T" data-points="1"></div>
-      <div class="tile" data-letter="T" data-points="1"></div>
-        <div class="tile" data-letter="E" data-points="1"></div>
-              <div class="tile" data-letter="R" data-points="1"></div>
-  
-     </div>
+            
+
         
-            <a href="#cta" class="btn-primary">How Many Do You Know?</a>
+
         </div>
     </header>
 
     <section class="features">
         <div class="container">
+        
             <h2>Scrabble Four Letter Word Trainer</h2>
             <div class="feature">
                 <h3>Click on a Letter Below to Test Yourself</h3>
+
 
 
 
@@ -431,7 +272,9 @@ document.querySelectorAll('.tile').forEach(tile => {
 
             </div>
 			
+<h2>Need to Brush up on Your 3 Letter Words?</h2>
 
+            <a href="3-letters.html" class="btn-primary">Test Yourself</a>
 
   <script>
     const letterScores = {
@@ -460,8 +303,10 @@ document.querySelectorAll('.tile').forEach(tile => {
    
     <section class="cta" id="cta">
         <div class="container">
-            <h2>Scrabularity</h2>
 
+  
+     </div>
+     
   <h1>Scrabble Score Calculator</h1>
   <div class="container">
     <input type="text" id="wordInput" placeholder="Enter a word" />
