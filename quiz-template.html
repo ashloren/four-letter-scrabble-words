@@ -35,48 +35,76 @@
     </style>
 </head>
 <body>
-    <h1>Four-Letter Words Starting with ''</h1>
+   <h1>Four-Letter Words Starting with ''</h1>
     <p>Try to guess as many four-letter words starting with '' as you can!</p>
     <input type="text" id="word-input" placeholder="Type your guess..." autofocus>
-    <button onclick="checkWord()">Submit</button>    <div id="counter">Correct Words: 0 / 0</div> 
+    <button onclick="checkWord()">Submit</button>
+    <div id="counter">Correct Words: 0 / 206</div>
+    <div id="progress-container">
+        <canvas id="progress-canvas" width="150" height="150"></canvas>
+    </div>
     <ul id="correct-words"></ul>
 
     <script>
-        // List of all four-letter words starting with 'E'
-        const wordList = ["AAHS",
-"AALS",
-"ABAS",
-].map(word => word.toLowerCase()); // Add all 113 words here
+        const wordList = ["aahs", "aals"];
         const correctGuesses = [];
         const totalWords = wordList.length;
 
         function updateCounter() {
             const correctCount = correctGuesses.length;
             document.getElementById("counter").textContent = `Correct Words: ${correctCount} / ${totalWords}`;
+            updateCanvas(correctCount / totalWords * 100);
         }
 
         function checkWord() {
             const input = document.getElementById("word-input").value.trim().toLowerCase();
 
-            // Check if the input is in the word list and hasn't been guessed before
             if (wordList.includes(input) && !correctGuesses.includes(input)) {
                 correctGuesses.push(input);
                 document.getElementById("correct-words").innerHTML += `<li>${input}</li>`;
-                updateCounter(); // Update the counter display
+                updateCounter();
             }
-
-            // Clear the input box
             document.getElementById("word-input").value = '';
         }
 
-        // Add an event listener to the input box to handle the Enter key
         document.getElementById("word-input").addEventListener("keyup", function(event) {
             if (event.key === "Enter") {
-                checkWord(); // Call the checkWord function when Enter is pressed
+                checkWord();
             }
         });
 
-        // Initialize the counter on page load
+        function updateCanvas(percentage) {
+            const canvas = document.getElementById("progress-canvas");
+            const ctx = canvas.getContext("2d");
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 60;
+
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw background circle
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+            ctx.fillStyle = "#f3f3f3";
+            ctx.fill();
+
+            // Draw progress arc
+            const endAngle = (percentage / 100) * 2 * Math.PI;
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, -Math.PI / 2, -Math.PI / 2 + endAngle);
+            ctx.lineWidth = 15;
+            ctx.strokeStyle = "#4caf50";
+            ctx.stroke();
+
+            // Draw text
+            ctx.font = "18px Arial";
+            ctx.fillStyle = "#333";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(`${Math.round(percentage)}%`, centerX, centerY);
+        }
+
         updateCounter();
     </script>
 </body>
