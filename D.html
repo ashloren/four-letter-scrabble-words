@@ -7,6 +7,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Four-Letter Words Quiz</title>
+   <style>
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Four-Letter Words Quiz</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -32,49 +38,83 @@
             margin-top: 20px;
             font-size: 1.2em;
         }
+        h1 {font-family: "Lobster", serif;
+  font-weight: 400;
+  font-style: normal;}
     </style>
 </head>
 <body>
-    <h1>Four-Letter Words Starting with 'D'</h1>
+   <h1>Four-Letter Words Starting with 'D'</h1>
     <p>Try to guess as many four-letter words starting with 'D' as you can!</p>
     <input type="text" id="word-input" placeholder="Type your guess..." autofocus>
-    <button onclick="checkWord()">Submit</button>    <div id="counter">Correct Words: 0 / 0</div> 
+    <button onclick="checkWord()">Submit</button>
+    <div id="counter">Correct Words: 0 / 206</div>
+    <div id="progress-container">
+        <canvas id="progress-canvas" width="150" height="150"></canvas>
+    </div>
     <ul id="correct-words"></ul>
 
     <script>
-        // List of all four-letter words starting with 'E'
         const wordList = ["DABS", "DACE", "DADA", "DADO", "DADS", "DAFF", "DAFT", "DAGS", "DAHL", "DAHS", "DAIS", "DAKS", "DALE", "DALS", "DAME", "DAMN", "DAMP", "DAMS", "DANG", "DANK", "DANS", "DAPS", "DARB", "DARE", "DARK", "DARN", "DART", "DASH", "DATA", "DATE", "DATO", "DAUB", "DAUT", "DAVY", "DAWK", "DAWN", "DAWS", "DAWT", "DAYS", "DAZE", "DEAD", "DEAF", "DEAL", "DEAN", "DEAR", "DEBS", "DEBT", "DECK", "DECO", "DEED", "DEEM", "DEEP", "DEER", "DEES", "DEET", "DEFI", "DEFT", "DEFY", "DEIL", "DEKE", "DELE", "DELF", "DELI", "DELL", "DELS", "DELT", "DEME", "DEMO", "DEMY", "DENE", "DENI", "DENS", "DENT", "DENY", "DEPS", "DERE", "DERM", "DESI", "DESK", "DEVA", "DEVI", "DEVS", "DEWS", "DEWY", "DEXY", "DEYS", "DHAK", "DHAL", "DHOW", "DIAL", "DIBS", "DICE", "DICK", "DIDO", "DIDY", "DIED", "DIEL", "DIES", "DIET", "DIFF", "DIFS", "DIGS", "DIKE", "DILL", "DIME", "DIMS", "DINE", "DING", "DINK", "DINO", "DINS", "DINT", "DIOL", "DIPS", "DIPT", "DIRE", "DIRK", "DIRL", "DIRT", "DISC", "DISH", "DISK", "DISS", "DITA", "DITE", "DITS", "DITZ", "DIVA", "DIVE", "DJIN", "DOAT", "DOBE", "DOBY", "DOCK", "DOCS", "DODO", "DOER", "DOES", "DOFF", "DOGE", "DOGS", "DOGY", "DOHS", "DOIT", "DOJO", "DOLE", "DOLL", "DOLS", "DOLT", "DOME", "DOMS", "DONA", "DONE", "DONG", "DONS", "DOOB", "DOOM", "DOOR", "DOPA", "DOPE", "DOPY", "DORE", "DORK", "DORM", "DORP", "DORR", "DORS", "DORY", "DOSA", "DOSE", "DOSH", "DOSS", "DOST", "DOTE", "DOTH", "DOTS", "DOTY", "DOUM", "DOUR", "DOUT", "DOUX", "DOVE", "DOWN", "DOWS", "DOXX", "DOXY", "DOZE", "DOZY", "DRAB", "DRAG", "DRAM", "DRAT", "DRAW", "DRAY", "DREE", "DREG", "DREK", "DREW", "DRIB", "DRIP", "DROP", "DRUB", "DRUG", "DRUM", "DRYS", "DUAD", "DUAL", "DUBS", "DUCE", "DUCI", "DUCK", "DUCT", "DUDE", "DUDS", "DUEL", "DUES", "DUET", "DUFF", "DUGS", "DUIT", "DUKE", "DULL", "DULY", "DUMA", "DUMB", "DUMP", "DUNE", "DUNG", "DUNK", "DUNS", "DUNT", "DUOS", "DUPE", "DUPS", "DURA", "DURE", "DURN", "DURO", "DURR", "DUSK", "DUST", "DUTY", "DYAD", "DYED", "DYER", "DYES", "DYKE", "DYNE"
-].map(word => word.toLowerCase()); // Add all 113 words here
+].map(word => word.toLowerCase());
         const correctGuesses = [];
         const totalWords = wordList.length;
 
         function updateCounter() {
             const correctCount = correctGuesses.length;
             document.getElementById("counter").textContent = `Correct Words: ${correctCount} / ${totalWords}`;
+            updateCanvas(correctCount / totalWords * 100);
         }
 
         function checkWord() {
             const input = document.getElementById("word-input").value.trim().toLowerCase();
 
-            // Check if the input is in the word list and hasn't been guessed before
             if (wordList.includes(input) && !correctGuesses.includes(input)) {
                 correctGuesses.push(input);
                 document.getElementById("correct-words").innerHTML += `<li>${input}</li>`;
-                updateCounter(); // Update the counter display
+                updateCounter();
             }
-
-            // Clear the input box
             document.getElementById("word-input").value = '';
         }
 
-        // Add an event listener to the input box to handle the Enter key
         document.getElementById("word-input").addEventListener("keyup", function(event) {
             if (event.key === "Enter") {
-                checkWord(); // Call the checkWord function when Enter is pressed
+                checkWord();
             }
         });
 
-        // Initialize the counter on page load
+        function updateCanvas(percentage) {
+            const canvas = document.getElementById("progress-canvas");
+            const ctx = canvas.getContext("2d");
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 60;
+
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw background circle
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+            ctx.fillStyle = "#f3f3f3";
+            ctx.fill();
+
+            // Draw progress arc
+            const endAngle = (percentage / 100) * 2 * Math.PI;
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, -Math.PI / 2, -Math.PI / 2 + endAngle);
+            ctx.lineWidth = 15;
+            ctx.strokeStyle = "#4caf50";
+            ctx.stroke();
+
+            // Draw text
+            ctx.font = "18px Arial";
+            ctx.fillStyle = "#333";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(`${Math.round(percentage)}%`, centerX, centerY);
+        }
+
         updateCounter();
     </script>
 </body>
